@@ -1,7 +1,7 @@
 import './App.css'
-import Login from './auth/login'
+import Login from './auth/Login'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import MainLayout from './Mainlayout'
+import MainLayout from './MainLayout'
 import Signup from './auth/Signup'
 
 const appRouter= createBrowserRouter([
