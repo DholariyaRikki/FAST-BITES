@@ -1,14 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import vitelogo from '/vite.svg'
 import './App.css'
-import {Button } from './components/ui/button'
+import Login from './auth/login'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import MainLayout from './Mainlayout'
+import Signup from './auth/Signup'
+
+const appRouter= createBrowserRouter([
+{
+path:"/",
+element:<MainLayout/>,
+// children:[{
+//   path:"/login"
+// }]
+
+},
+{
+  path:"/login",
+  element:<Login/>
+},
+{
+  path:"/signup",
+  element:<Signup/>
+},
+
+
+])
+
 function App() {
-const [count, setCount] = useState(0)
 return (
-  <>
-<Button>Lets build food app</Button>
-</>
+  <main>
+    <RouterProvider router={appRouter}>
+
+    </RouterProvider>
+</main>
 )
 }
 export default App
