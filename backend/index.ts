@@ -1,7 +1,15 @@
 import express from "express"
+import dotenv from "dotenv"
+dotenv.config()
+
+// define port
+const PORT =process.env.PORT || 3000
+
+// define app
 const app = express()
 
-const PORT = 3000
+
+
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
