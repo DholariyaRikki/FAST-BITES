@@ -1,11 +1,14 @@
 import { Request, Response } from "express";
 import { User } from "../models/user.models";
-import bcrypt from "bcryptjs"
+import bcrypt from "bcryptjs";  
 import crypto from "crypto";
 import cloudinary from "../utils/cloudinary";
+import { generatevarificationcode } from "../utils/generatevarificationtoken";
+import { genratetoken } from "../utils/generatetoken";
+import { sendpaaswordresetemail, sendResetsuccessEmail, sendverificationemail, sendWelcomeEmail } from "../mailtrap/email";
 
 
-export const singup = async(req:Request,res:Response)=>{
+export const signup = async(req:Request,res:Response)=>{
     try {
         const{fullname,email,password,contact} = req.body
 
@@ -16,8 +19,11 @@ export const singup = async(req:Request,res:Response)=>{
                 message:"User already exists"
             })
         }
-        const hashpassword = await bcrypt.hash(password,10)
-        const verificationtoken = ""//genrateverification()
+        const saltRounds = 10;
+        const hashpassword = await bcrypt.hash(password, saltRounds);
+        console.log(hashpassword);
+        
+        const verificationtoken = generatevarificationcode()
 
         user = await User.create({
             fullname,
@@ -28,9 +34,9 @@ export const singup = async(req:Request,res:Response)=>{
             verificationtokenexpireat:Date.now() + 24*60*60*1000
         })
 
-        // genratetoken(req,user)
+        genratetoken(res,user)
 
-        // await sendverificationemail(email,verificationtoken)
+        await sendverificationemail(email,verificationtoken)
 
         const userwithoutpassword = await User.findOne({email}).select("-password")
         return res.status(201).json({
@@ -64,7 +70,7 @@ export const login = async(req:Request,res:Response)=>{
                 message:"incorrect password"
             })
         }
-        // genratetoken(req,user)
+        genratetoken(res,user)
         user.lastlogin = new Date()
         await user.save()
 
@@ -81,7 +87,7 @@ export const login = async(req:Request,res:Response)=>{
     }
 }
 
-export const verifyemail = async(req:Request,res:Response)=>{
+export const verifyEmail = async(req:Request,res:Response)=>{
     try {
         const {verificationcode} = req.body
         const user = await User.findOne({verificationtoken:verificationcode,verificationtokenexpireat:{$gt:Date.now()}}).select("-password")
@@ -95,7 +101,7 @@ export const verifyemail = async(req:Request,res:Response)=>{
         user.verificationtoken = undefined
         user.verificationtokenexpireat = undefined
         await user.save()
-        // await sendWelcomeEmail(user.email,user.fullname)
+        await sendWelcomeEmail(user.email,user.fullname)
 
 return res.status(200).json({
     success:true,
@@ -120,7 +126,7 @@ export const logout = async(_:Request,res:Response)=>{
     }
 }
 
-export const forgotpassword = async(req:Request,res:Response)=>{
+export const forgotPassword = async(req:Request,res:Response)=>{
     try {
         const {email} = req.body
         const user = await User.findOne({email})
@@ -136,7 +142,7 @@ export const forgotpassword = async(req:Request,res:Response)=>{
         user.resetpasswordtokenexpire=resettokenexpireat
         await user.save()
 
-        // await sendpaaswordresetemail(user.email, `${process.env.FRONTEND_URL}/resetpassword/${token}`);
+        await sendpaaswordresetemail(user.email, `${process.env.FRONTEND_URL}/resetpassword/${resettoken}`);
 
         return res.status(200).json({
             success:true,
@@ -148,7 +154,7 @@ export const forgotpassword = async(req:Request,res:Response)=>{
     }
 }
 
-export const resetpassword = async(req:Request,res:Response)=>{
+export const resetPassword = async(req:Request,res:Response)=>{
     try {
         const {token} = req.params
         const {password} = req.body
@@ -166,7 +172,7 @@ export const resetpassword = async(req:Request,res:Response)=>{
         user.resetpasswordtokenexpire = undefined
         await user.save()
 
-        // await sendResetPasswordEmail(user.email)
+        await sendResetsuccessEmail(user.email)
 
         return res.status(200).json({
             success:true,
