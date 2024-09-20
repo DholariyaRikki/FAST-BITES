@@ -4,7 +4,7 @@ import connectDB from "./db/connectdb"
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import userRoute from "./routes/user.routs";
+import userRoute from "./routes/user.route";
 
 import path from "path";
 
