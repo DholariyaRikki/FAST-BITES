@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { User } from "../models/user.models";
-import bcrypt from "bcryptjs"
+import bcrypt from "bcryptjs";  
 import crypto from "crypto";
 import cloudinary from "../utils/cloudinary";
 import { generatevarificationcode } from "../utils/generatevarificationtoken";
@@ -19,7 +19,10 @@ export const signup = async(req:Request,res:Response)=>{
                 message:"User already exists"
             })
         }
-        const hashpassword = await bcrypt.hash(password,10)
+        const saltRounds = 10;
+        const hashpassword = await bcrypt.hash(password, saltRounds);
+        console.log(hashpassword);
+        
         const verificationtoken = generatevarificationcode()
 
         user = await User.create({

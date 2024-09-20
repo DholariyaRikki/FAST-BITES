@@ -22,19 +22,13 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(express.json());
 app.use(cookieParser());
 const corsOptions = {
-    origin: "https://localhost:3350",
+    origin: "https://localhost:5173",
     credentials: true
 }
 app.use(cors(corsOptions));
 
 // api
 app.use("/api/v1/user", userRoute);
-
-
-app.use(express.static(path.join(DIRNAME,"/client/dist")));
-app.use("*",(_,res) => {
-    res.sendFile(path.resolve(DIRNAME, "client","dist","index.html"));
-});
 
 app.listen(PORT, () => {
     connectDB();
