@@ -1,101 +1,95 @@
-import { Request,Response } from "express"
-import { Restaurant } from "../models/restaurant.models"
-import uploadImageOnCloudinary from "../utils/imageupload"
-import { Order } from "../models/order.models"
+import { Request, Response } from "express";
+import { Restaurant } from "../models/restaurant.models";
+import { Multer } from "multer";
+import uploadImageOnCloudinary from "../utils/imageupload";
+import { Order } from "../models/order.models";
 
-export const createRestaurant =  async(req:Request,res:Response)=>{
+export const createRestaurant = async (req: Request, res: Response) => {
     try {
-        const {restaurantname,city,country,deliveryTime,cuisines} = req.body
-        const file = req.file
-        const restaurant = await Restaurant.findOne({user:req.id})
-        if(restaurant){
-            return res.status(400).json({
-                success:false,
-                message:"Restaurant already exists"
-            })
-        }
-        if(!file){
-            return res.status(400).json({
-                success:false,
-                message:"Image is required"
-            })
-        }
-        const imageurl = await uploadImageOnCloudinary(file as Express.Multer.File)
+        const { restaurantName, city, country, deliveryTime, cuisines } = req.body;
+        const file = req.file;
+ 
 
+        const restaurant = await Restaurant.findOne({ user: req.id });
+        if (restaurant) {
+            return res.status(400).json({
+                success: false,
+                message: "Restaurant already exist for this user"
+            })
+        }
+        if (!file) {
+            return res.status(400).json({
+                success: false,
+                message: "Image is required"
+            })
+        }
+        const imageUrl = await uploadImageOnCloudinary(file as Express.Multer.File);
         await Restaurant.create({
-            user:req.id,
-            restaurantname,
+            user: req.id,
+            restaurantName,
             city,
             country,
             deliveryTime,
-            cuisines:JSON.parse(cuisines),
-            image:imageurl
-        })
+            cuisines: JSON.parse(cuisines),
+            imageUrl
+        });
         return res.status(201).json({
-            succsess:true,
-            message:"Restaurant created successfully"
-        })
+            success: true,
+            message: "Restaurant Added"
+        });
     } catch (error) {
-        console.log(error)
-        res.status(500).json({message:"internal server error"})
+        console.log(error);
+        return res.status(500).json({ message: "Internal server error" })
     }
 }
-
-
-export const getRestaurant = async(req:Request,res:Response)=>{
+export const getRestaurant = async (req: Request, res: Response) => {
     try {
-        const restaurant = await Restaurant.find({user:req.id})
-        if(!restaurant){
-            return res.status(400).json({
-                success:false,
-                message:"Restaurants not found"
+        const restaurant = await Restaurant.findOne({ user: req.id }).populate('menus');
+        if (!restaurant) {
+            return res.status(404).json({
+                success: false,
+                restaurant:[],
+                message: "Restaurant not found"
             })
-        }
-        return res.status(200).json({
-            success:true,
-            restaurant
-        })
+        };
+        return res.status(200).json({ success: true, restaurant });
     } catch (error) {
-        console.log(error)
-        res.status(500).json({message:"internal server error"})
+        console.log(error);
+        return res.status(500).json({ message: "Internal server error" })
     }
 }
-
-
-export const updatedRestaurant = async(req:Request,res:Response)=>{
+export const updateRestaurant = async (req: Request, res: Response) => {
     try {
-        const {restaurantname,city,country,deliveryTime,cuisines} = req.body
-        const file = req.file
-        const restaurant = await Restaurant.findOne({user:req.id})
-        if(!restaurant){
-            return res.status(400).json({
-                success:false,
-                message:"Restaurants not found"
+        const { restaurantName, city, country, deliveryTime, cuisines } = req.body;
+        const file = req.file;
+        const restaurant = await Restaurant.findOne({ user: req.id });
+        if (!restaurant) {
+            return res.status(404).json({
+                success: false,
+                message: "Restaurant not found"
             })
-        }
-        restaurant.restaurantname = restaurantname
-        restaurant.city = city
-        restaurant.country = country
-        restaurant.deliverytime = deliveryTime
-        restaurant.cuisines = JSON.parse(cuisines)
+        };
+        restaurant.restaurantname = restaurantName;
+        restaurant.city = city;
+        restaurant.country = country;
+        restaurant.deliverytime = deliveryTime;
+        restaurant.cuisines = JSON.parse(cuisines);
 
         if (file) {
-            const imageurl = await uploadImageOnCloudinary(file as Express.Multer.File)
-            restaurant.imageurl = imageurl
+            const imageUrl = await uploadImageOnCloudinary(file as Express.Multer.File);
+            restaurant.imageurl = imageUrl;
         }
-
-        await restaurant.save()
+        await restaurant.save();
         return res.status(200).json({
-            success:true,
-            message:"Restaurant updated successfully",
+            success: true,
+            message: "Restaurant updated",
             restaurant
         })
     } catch (error) {
-        console.log(error)
-        res.status(500).json({message:"internal server error"})
+        console.log(error);
+        return res.status(500).json({ message: "Internal server error" })
     }
 }
-
 export const getRestaurantOrder = async (req: Request, res: Response) => {
     try {
         const restaurant = await Restaurant.findOne({ user: req.id });
@@ -115,7 +109,6 @@ export const getRestaurantOrder = async (req: Request, res: Response) => {
         return res.status(500).json({ message: "Internal server error" })
     }
 }
-
 export const updateOrderStatus = async (req: Request, res: Response) => {
     try {
         const { orderId } = req.params;
@@ -140,15 +133,13 @@ export const updateOrderStatus = async (req: Request, res: Response) => {
         return res.status(500).json({ message: "Internal server error" })
     }
 }
-
-
 export const searchRestaurant = async (req: Request, res: Response) => {
     try {
         const searchText = req.params.searchText || "";
         const searchQuery = req.query.searchQuery as string || "";
         const selectedCuisines = (req.query.selectedCuisines as string || "").split(",").filter(cuisine => cuisine);
         const query: any = {};
-
+        // basic search based on searchText (name ,city, country)
         console.log(selectedCuisines);
         
         if (searchText) {
@@ -158,12 +149,15 @@ export const searchRestaurant = async (req: Request, res: Response) => {
                 { country: { $regex: searchText, $options: 'i' } },
             ]
         }
+        // filter on the basis of searchQuery
         if (searchQuery) {
             query.$or = [
                 { restaurantName: { $regex: searchQuery, $options: 'i' } },
                 { cuisines: { $regex: searchQuery, $options: 'i' } }
             ]
         }
+        // console.log(query);
+        // ["momos", "burger"]
         if(selectedCuisines.length > 0){
             query.cuisines = {$in:selectedCuisines}
         }
