@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import uploadImageOnCloudinary from "../utils/imageUpload";
-import {Menu} from "../models/menu.model";
-import { Restaurant } from "../models/restaurant.model";
+import uploadImageOnCloudinary from "../utils/imageupload";
+import {Menu} from "../models/menu.models";
+import { Restaurant } from "../models/restaurant.models";
 import mongoose, { ObjectId } from "mongoose";
 
 export const addMenu = async (req:Request, res:Response) => {

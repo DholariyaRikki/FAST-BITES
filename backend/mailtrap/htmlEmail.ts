@@ -187,10 +187,10 @@ export const generatePasswordResetEmailHtml = (resetURL: string) => {
               <p>We received a request to reset your password. Click the button below to reset it.</p>
               <a href="${resetURL}" class="button">Reset Password</a>
               <p>If you didn't request a password reset, please ignore this email.</p>
-              <p>Thank you,<br/>The Patel Food Team</p>
+              <p>Thank you,<br/>The Fast-Bites Team</p>
             </div>
             <div class="email-footer">
-              <p>&copy; 2024 Patel Food. All rights reserved.</p>
+              <p>&copy; 2024 Fast-Bites. All rights reserved.</p>
             </div>
           </div>
         </body>
@@ -242,10 +242,10 @@ export const generatePasswordResetEmailHtml = (resetURL: string) => {
               <p>Hi,</p>
               <p>Your password has been successfully reset. You can now log in with your new password.</p>
               <p>If you did not request this change, please contact our support team immediately.</p>
-              <p>Thank you,<br/>The Patel Food Team</p>
+              <p>Thank you,<br/>The Fast-Bites Team</p>
             </div>
             <div class="email-footer">
-              <p>&copy; 2024 Patel Food. All rights reserved.</p>
+              <p>&copy; 2024 Fast-Bites. All rights reserved.</p>
             </div>
           </div>
         </body>

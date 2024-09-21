@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { Restaurant } from "../models/restaurant.model";
-import { Order } from "../models/order.model";
+import { Restaurant } from "../models/restaurant.models";
+import { Order } from "../models/order.models";
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);

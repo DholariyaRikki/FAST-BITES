@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { User } from "../models/user.model";
+import { User } from "../models/user.models";
 import bcrypt from "bcryptjs";
 import crypto from "crypto"; 
 import cloudinary from "../utils/cloudinary";
 import { generateVerificationCode } from "../utils/generateVerificationCode";
-import { generateToken } from "../utils/generateToken";
+import { generateToken } from "../utils/generatetoken";
 import { sendPasswordResetEmail, sendResetSuccessEmail, sendVerificationEmail, sendWelcomeEmail } from "../mailtrap/email";
 
 export const signup = async (req: Request, res: Response) => {
@@ -62,7 +62,7 @@ export const login = async (req: Request, res: Response) => {
             });
         }
         generateToken(res, user);
-        user.lastLogin = new Date();
+        user.lastlogin = new Date();
         await user.save();
 
         // send user without passowrd
@@ -89,9 +89,9 @@ export const verifyEmail = async (req: Request, res: Response) => {
                 message: "Invalid or expired verification token"
             });
         }
-        user.isVerified = true;
-        user.verificationToken = undefined;
-        user.verificationTokenExpiresAt = undefined
+        user.isverified = true;
+        user.verificationtoken = undefined;
+        user.verificationtokenexpireat = undefined
         await user.save();
 
         // send welcome email
@@ -133,8 +133,8 @@ export const forgotPassword = async (req: Request, res: Response) => {
         const resetToken = crypto.randomBytes(40).toString('hex');
         const resetTokenExpiresAt = new Date(Date.now() + 1 * 60 * 60 * 1000); // 1 hour
 
-        user.resetPasswordToken = resetToken;
-        user.resetPasswordTokenExpiresAt = resetTokenExpiresAt;
+        user.resetpasswordtoken = resetToken;
+        user.resetpasswordtokenexpire = resetTokenExpiresAt;
         await user.save();
 
         // send email
@@ -163,8 +163,8 @@ export const resetPassword = async (req: Request, res: Response) => {
         //update password
         const hashedPassword = await bcrypt.hash(newPassword, 10);
         user.password = hashedPassword;
-        user.resetPasswordToken = undefined;
-        user.resetPasswordTokenExpiresAt = undefined;
+        user.resetpasswordtoken = undefined;
+        user.resetpasswordtokenexpire = undefined;
         await user.save();
 
         // send success reset email
