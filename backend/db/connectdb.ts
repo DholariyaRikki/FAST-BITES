@@ -1,17 +1,13 @@
+// mongopassword=jgUYh0afhTqzd9dC
+// asurendrakumarpatel
 import mongoose from "mongoose";
-import dotenv from "dotenv"
-dotenv.config()
 
-// function for connecting to db
-const connectdb = async () => {
+const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.MONGO_URI!)
-        console.log("MongoDB connected")
+        await mongoose.connect(process.env.MONGO_URI!);
+        console.log('mongoDB connected.');
     } catch (error) {
-        console.log(error)
-        process.exit(1)
+        console.log(error);
     }
-}   
-
-// export function
-export default connectdb 
+}
+export default connectDB;

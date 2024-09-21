@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { Restaurant } from "../models/restaurant.models";
+import { Restaurant } from "../models/restaurant.model";
 import { Multer } from "multer";
-import uploadImageOnCloudinary from "../utils/imageupload";
-import { Order } from "../models/order.models";
+import uploadImageOnCloudinary from "../utils/imageUpload";
+import { Order } from "../models/order.model";
 
 export const createRestaurant = async (req: Request, res: Response) => {
     try {
@@ -69,15 +69,15 @@ export const updateRestaurant = async (req: Request, res: Response) => {
                 message: "Restaurant not found"
             })
         };
-        restaurant.restaurantname = restaurantName;
+        restaurant.restaurantName = restaurantName;
         restaurant.city = city;
         restaurant.country = country;
-        restaurant.deliverytime = deliveryTime;
+        restaurant.deliveryTime = deliveryTime;
         restaurant.cuisines = JSON.parse(cuisines);
 
         if (file) {
             const imageUrl = await uploadImageOnCloudinary(file as Express.Multer.File);
-            restaurant.imageurl = imageUrl;
+            restaurant.imageUrl = imageUrl;
         }
         await restaurant.save();
         return res.status(200).json({
