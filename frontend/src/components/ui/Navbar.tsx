@@ -37,6 +37,9 @@ import {
   SheetTrigger,
 } from "./sheet";
 import { Separator } from "./separator";
+import { useUserStore } from "@/store/useUserStore";
+import { useThemeStore } from "@/store/useThemeStore";
+import { useCartStore } from "@/store/useCartStore";
 // import { useUserStore } from "@/store/useUserStore";
 // import { useCartStore } from "@/store/useCartStore";
 // import { useThemeStore } from "@/store/useThemeStore";
