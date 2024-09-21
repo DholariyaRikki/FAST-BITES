@@ -8,6 +8,7 @@ const API_END_POINT = "http://localhost:3350/api/v1/user"
 axios.defaults.withCredentials = true;
 
 type User = {
+    isverified: any;
     fullname:string;
     email:string;
     contact:number;
