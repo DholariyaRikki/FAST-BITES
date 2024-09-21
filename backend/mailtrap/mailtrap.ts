@@ -9,6 +9,6 @@ token: process.env.API_TOKEN!
 });
 
 export const sender = {
-  email: "fastbites021648@gmail.com",
+  email: "hello@demomailtrap.com",
   name: "Fast-Bites",
 };

@@ -2,20 +2,20 @@ import { generatePasswordResetEmailHtml, generateResetSuccessEmailHtml, generate
 import { client, sender } from "./mailtrap";
 
 export const sendverificationemail = async (email: string, verificationtoken: string) => {
-  const recipients = [{ email }];
-  try {
-    const res = await client.send({
-      from: sender,
-      to: recipients,
-      subject: "Verify your email",
-      html: htmlContent.replace("{verificationtoken}", verificationtoken),
-      category: "email verification"
-    });
-    return res; // Return the result if successful
-  } catch (error) {
-    console.log(error);
-    throw new Error("Failed to send verification email"); // You can also log the error
-  }
+  const recipient = [{ email }];
+    try {
+        const res = await client.send({
+            from: sender,
+            to: recipient,
+            subject: 'Verify your email',
+            html:htmlContent.replace("{verificationToken}", verificationtoken),
+            category: 'Email Verification'
+        });
+    } catch (error) {
+        console.log(error);
+        throw new Error("Failed to send email verification")
+
+    }
 };
 
 
