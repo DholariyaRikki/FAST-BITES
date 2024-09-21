@@ -50,9 +50,16 @@ const Navbar = () => {
   return (
     <div className="max-w-7xl mx-auto">
       <div className="flex items-center justify-between h-14">
-        <Link to="/">
-          <h1 className="font-bold md:font-extrabold text-2xl">FAST-BITES</h1>
-        </Link>
+      <Link to="/">
+  <div className="flex items-center">
+    <img 
+      src="/src/images/Gemini_Generated_Image_oe9gj5oe9gj5oe9g.jpeg" 
+      alt="Fast Bites Logo" 
+      className="h-20 w-20 mr-2" 
+    />
+    <h1 className="font-bold md:font-extrabold text-2xl">FAST-BITES</h1>
+  </div>
+</Link>
         <div className="hidden md:flex items-center gap-10">
           <div className="hidden md:flex items-center gap-6">
             <Link to="/">Home</Link>
