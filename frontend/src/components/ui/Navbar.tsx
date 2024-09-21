@@ -53,9 +53,9 @@ const Navbar = () => {
       <Link to="/">
   <div className="flex items-center">
     <img 
-      src="/src/images/Gemini_Generated_Image_oe9gj5oe9gj5oe9g.jpeg" 
+      src="/public/fast-bites-logo.png" 
       alt="Fast Bites Logo" 
-      className="h-20 w-20 mr-2" 
+      className="h-20 w-20 mr-2 " 
     />
     <h1 className="font-bold md:font-extrabold text-2xl">FAST-BITES</h1>
   </div>
