@@ -1,254 +1,858 @@
 export const htmlContent: string = `
     <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Email Verification</title>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                background-color: #f4f4f4;
-                margin: 0;
-                padding: 0;
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9fafc;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            animation: slideIn 1s ease-out forwards;
+        }
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
             }
-            .container {
-                max-width: 600px;
-                margin: 0 auto;
-                padding: 20px;
-                background-color: #ffffff;
-                border-radius: 10px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            100% {
+                opacity: 1;
+                transform: translateY(0);
             }
-            .header {
-                text-align: center;
-                padding: 20px 0;
+        }
+        .banner {
+            width: 100%;
+            height: 200px;
+            background-image: url('fast-bites-logo.png'); /* Replace with a food-related banner */
+           background-size: contain;
+            background-position: center;
+            position: relative;
+            animation: bannerMove 7s linear infinite; /* Continuous movement */
+        }
+        @keyframes bannerMove {
+            0% {
+                width: 300%;
+                
             }
-            .header h1 {
-                margin: 0;
-                color: #333333;
+            100% {
+                width: 100%;
             }
-            .content {
-                padding: 20px;
-                text-align: center;
+        }
+        .header {
+            text-align: center;
+            padding: 30px;
+            background-color: hsl(144, 96%, 9%); /* Vibrant orange for energy */
+        }
+        .header h1 {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: bold;
+            margin: 0;
+        }
+        .content {
+            text-align: center;
+            padding: 40px;
+        }
+        .content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            color: hsl(144, 96%, 9%);
+            margin-bottom: 20px;
+        }
+        .content p {
+            font-size: 18px;
+            color: hsl(144, 96%, 9%);
+            margin-bottom: 25px;
+        }
+        .content strong {
+            color: hsl(145, 96%, 21%);
+        }
+        .content .code {
+            font-size: 28px;
+            font-weight: bold;
+            color: hsl(144, 96%, 9%); 
+            margin: 20px 0;
+            padding: 15px;
+            border: 2px dashed hsl(145, 96%, 21%); 
+            border-radius: 10px;
+            background-color: #fff5f0;
+            opacity: 0;
+            animation: codeReveal 1.5s ease-out forwards;
+        }
+        @keyframes codeReveal {
+            0% {
+                opacity: 0;
+                transform: scale(0.95);
             }
-            .content h2 {
-                color: #333333;
+            100% {
+                opacity: 1;
+                transform: scale(1);
             }
-            .content p {
-                color: #666666;
-                font-size: 16px;
-                line-height: 1.5;
+        }
+        .quote {
+            font-style: italic;
+            color: hsl(144, 96%, 9%);
+            text-align: center;
+            border-left: 4px solid hsl(145, 96%, 21%);
+            padding-left: 15px;
+            margin: 30px 0;
+            font-family: 'Playfair Display', serif;
+        }
+        /* .content .code {
+            font-size: 28px;
+            font-weight: bold;
+            color: hsl(144, 96%, 9%); 
+            margin: 20px 0;
+            padding: 15px;
+            border: 2px dashed hsl(145, 96%, 21%); 
+            border-radius: 10px;
+            background-color: #fff5f0;
+            opacity: 0;
+            animation: codeReveal 5s ease-out forwards;
+        }
+        @keyframes codeReveal {
+            0% {
+                opacity: 0;
+                transform: scale(0.95);
             }
-            .content .code {
-                font-size: 24px;
-                font-weight: bold;
-                color: #333333;
-                margin: 20px 0;
-                padding: 10px;
-                border: 1px solid #dddddd;
-                border-radius: 5px;
-                background-color: #f9f9f9;
+            100% {
+                opacity: 1;
+                transform: scale(1);
             }
-            .footer {
-                text-align: center;
-                padding: 20px;
-                font-size: 14px;
-                color: #999999;
+        } */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f1f1f1;
+            color: #888888;
+        }
+        .footer p {
+            margin: 0;
+        }
+
+        /* Delivery Bike Animation */
+        .delivery-animation {
+            position: relative;
+            overflow: hidden;
+            height: 50px;
+            margin: 40px 0 0 0;
+        }
+        .delivery-bike {
+            position: absolute;
+            bottom: 0;
+            left: -60px; /* Starts off-screen */
+            width: 60px;
+            height: 40px;
+            animation: bikeMove 7s linear infinite; /* Continuous movement */
+        }
+        @keyframes bikeMove {
+            0% {
+                left: 100%;
             }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="header">
-                <h1>Verify Your Email</h1>
-            </div>
-            <div class="content">
-                <h2>Hello,</h2>
-                <p>Thank you for registering with us. To complete your registration, please verify your email address by entering the following verification code:</p>
-                <div class="code">{verificationToken}</div>
-                <p>If you did not request this verification, please ignore this email.</p>
-            </div>
-            <div class="footer">
-                <p>&copy; 2024 Fast-Bites. All rights reserved.</p>
-            </div>
+            100% {
+                right: 100%;
+            }
+        }
+       .reset-password-button{
+        padding: 16px 24px;
+        background-color: hsl(144, 96%, 9%);
+       border-radius: 20px;
+       
+       }
+       .reset-password-button:hover{
+        background-color: hsl(145, 96%, 21%);
+        cursor: pointer;
+        animation-delay: 2ms;
+        transition:1s;
+       }
+       a{
+        color: white;
+        text-decoration: none;
+       }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Banner Section -->
+        
+
+        <!-- Header Section -->
+        <div class="header">
+            <h1>Email Verification</h1>
         </div>
-    </body>
-    </html>
+        <div class="banner"></div>
+        <!-- Main Content Section -->
+        <div class="content">
+            <h2>Verify Your Email!</h2>
+            <p>We're excited to have you on board. To complete your registration, please enter the verification code below:</p>
+            <div class="code">{verificationToken}</div>
+            <p>If this wasn’t you, you can safely ignore this email. Enjoy your meals with Fast-Bites!</p>
+
+            <div class="quote">
+                “Good food is all the sweeter when shared with good friends.”<br><strong>– Fast-Bites Team</strong>
+            </div>
+
+            <p>
+                If you have any questions or need assistance, our customer support team is always here for you. 
+                Feel free to <a href="mailto:support@fast-bites.com" style="color: hsl(145, 96%, 21%); text-decoration: none;">reach out</a> at any time.
+            </p>
+       
+
+        </div>
+
+        <!-- Delivery Bike Animation Section -->
+        <div class="delivery-animation">
+            <img class="delivery-bike" src="Gemini_Generated_Image_8wkyr98wkyr98wky.png" alt="Delivery Bike"> <!-- Replace with an appropriate image URL -->
+        </div>
+
+        <!-- Footer Section -->
+        <div class="footer">
+            <p>&copy; 2024 Fast-Bites. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
+
     `;
 
 export const generateWelcomeEmailHtml = (name: string) => {
     return `
-          <html>
-            <head>
-              <style>
-                .email-container {
-                  font-family: Arial, sans-serif;
-                  line-height: 1.6;
-                  color: #333;
-                  padding: 20px;
-                  background-color: #f4f4f4;
-                  border-radius: 10px;
-                  max-width: 600px;
-                  margin: auto;
-                }
-                .email-header {
-                  background-color: #4CAF50;
-                  color: white;
-                  padding: 10px;
-                  text-align: center;
-                  border-radius: 10px 10px 0 0;
-                }
-                .email-body {
-                  padding: 20px;
-                  background-color: white;
-                  border-radius: 0 0 10px 10px;
-                }
-                .email-footer {
-                  text-align: center;
-                  padding: 10px;
-                  font-size: 12px;
-                  color: #777;
-                }
-              </style>
-            </head>
-            <body>
-              <div class="email-container">
-                <div class="email-header">
-                  <h1>Welcome to Fast-Bites!</h1>
-                </div>
-                <div class="email-body">
-                  <p>Hi ${name},</p>
-                  <p>Congratulations! Your email has been successfully verified.</p>
-                  <p>We are excited to have you on board at FAST-BITES. Explore our platform and enjoy our services.</p>
-                  <p>If you have any questions or need assistance, feel free to reach out to us.</p>
-                  <p>Best Regards,<br/>The Fast-Bites Team</p>
-                </div>
-                <div class="email-footer">
-                  <p>&copy; 2024 Fast-Bites. All rights reserved.</p>
-                </div>
-              </div>
-            </body>
-          </html>
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9fafc;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            animation: slideIn 1s ease-out forwards;
+        }
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .banner {
+            width: 100%;
+            height: 200px;
+            background-image: url('fast-bites-logo.png'); /* Replace with a food-related banner */
+           background-size: contain;
+            background-position: center;
+            position: relative;
+            animation: bannerMove 7s linear infinite; /* Continuous movement */
+        }
+        @keyframes bannerMove {
+            0% {
+                width: 300%;
+                
+            }
+            100% {
+                width: 100%;
+            }
+        }
+        .header {
+            text-align: center;
+            padding: 30px;
+            background-color: hsl(144, 96%, 9%); /* Vibrant orange for energy */
+        }
+        .header h1 {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: bold;
+            margin: 0;
+        }
+        .content {
+            text-align: center;
+            padding: 40px;
+        }
+        .content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            color: hsl(144, 96%, 9%);
+            margin-bottom: 20px;
+        }
+        .content p {
+            font-size: 18px;
+            color: hsl(144, 96%, 9%);
+            margin-bottom: 25px;
+        }
+        .content strong {
+            color: hsl(145, 96%, 21%);
+        }
+        .quote {
+            font-style: italic;
+            color: hsl(144, 96%, 9%);
+            text-align: center;
+            border-left: 4px solid hsl(145, 96%, 21%);
+            padding-left: 15px;
+            margin: 30px 0;
+            font-family: 'Playfair Display', serif;
+        }
+        /* .content .code {
+            font-size: 28px;
+            font-weight: bold;
+            color: hsl(144, 96%, 9%); 
+            margin: 20px 0;
+            padding: 15px;
+            border: 2px dashed hsl(145, 96%, 21%); 
+            border-radius: 10px;
+            background-color: #fff5f0;
+            opacity: 0;
+            animation: codeReveal 5s ease-out forwards;
+        }
+        @keyframes codeReveal {
+            0% {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        } */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f1f1f1;
+            color: #888888;
+        }
+        .footer p {
+            margin: 0;
+        }
+
+        /* Delivery Bike Animation */
+        .delivery-animation {
+            position: relative;
+            overflow: hidden;
+            height: 50px;
+            margin: 40px 0 0 0;
+        }
+        .delivery-bike {
+            position: absolute;
+            bottom: 0;
+            left: -60px; /* Starts off-screen */
+            width: 60px;
+            height: 40px;
+            animation: bikeMove 7s linear infinite; /* Continuous movement */
+        }
+        @keyframes bikeMove {
+            0% {
+                left: 100%;
+            }
+            100% {
+                right: 100%;
+            }
+        }
+       .reset-password-button{
+        padding: 16px 24px;
+        background-color: hsl(144, 96%, 9%);
+       border-radius: 20px;
+       
+       }
+       .reset-password-button:hover{
+        background-color: hsl(145, 96%, 21%);
+        cursor: pointer;
+        animation-delay: 2ms;
+        transition:1s;
+       }
+       a{
+        color: white;
+        text-decoration: none;
+       }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Banner Section -->
+        
+
+        <!-- Header Section -->
+        <div class="header">
+            <h1>Email Verification</h1>
+        </div>
+        <div class="banner"></div>
+        <!-- Main Content Section -->
+        <div class="content">
+            <h2>Welcome to Fast-Bites, <strong>${name}</strong></h2>
+            <p>
+                Your email has been successfully verified, and your account is now active! 
+                We're thrilled to have you join our community of food lovers. At Fast-Bites, you’ll discover 
+                a world of delicious meals, all just a click away. Whether you’re craving comfort food or looking to try 
+                something new, we’ve got you covered.
+            </p>
+
+            <h2>What’s Next?</h2>
+            <p>
+                Now that your account is all set, dive into the Fast-Bites experience. Explore our wide variety of cuisines, 
+                carefully crafted by top chefs from around the world, and enjoy quick and easy delivery right to your doorstep.
+            </p>
+
+            <div class="quote">
+                “Good food is all the sweeter when shared with good friends.”<br><strong>– Fast-Bites Team</strong>
+            </div>
+
+            <p>
+                If you have any questions or need assistance, our customer support team is always here for you. 
+                Feel free to <a href="mailto:support@fast-bites.com" style="color: hsl(145, 96%, 21%); text-decoration: none;">reach out</a> at any time.
+            </p>
+       
+
+        </div>
+
+        <!-- Delivery Bike Animation Section -->
+        <div class="delivery-animation">
+            <img class="delivery-bike" src="Gemini_Generated_Image_8wkyr98wkyr98wky.png" alt="Delivery Bike"> <!-- Replace with an appropriate image URL -->
+        </div>
+
+        <!-- Footer Section -->
+        <div class="footer">
+            <p>&copy; 2024 Fast-Bites. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
         `;
 };
 
 export const generatePasswordResetEmailHtml = (resetURL: string) => {
     return `
-      <html>
-        <head>
-          <style>
-            .email-container {
-              font-family: Arial, sans-serif;
-              line-height: 1.6;
-              color: #333;
-              padding: 20px;
-              background-color: #f4f4f4;
-              border-radius: 10px;
-              max-width: 600px;
-              margin: auto;
+      <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9fafc;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            animation: slideIn 1s ease-out forwards;
+        }
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
             }
-            .email-header {
-              background-color: #d9534f;
-              color: white;
-              padding: 10px;
-              text-align: center;
-              border-radius: 10px 10px 0 0;
+            100% {
+                opacity: 1;
+                transform: translateY(0);
             }
-            .email-body {
-              padding: 20px;
-              background-color: white;
-              border-radius: 0 0 10px 10px;
+        }
+        .banner {
+            width: 100%;
+            height: 200px;
+            background-image: url('fast-bites-logo.png'); /* Replace with a food-related banner */
+           background-size: contain;
+            background-position: center;
+            position: relative;
+            animation: bannerMove 7s linear infinite; /* Continuous movement */
+        }
+        @keyframes bannerMove {
+            0% {
+                width: 300%;
+                
             }
-            .email-footer {
-              text-align: center;
-              padding: 10px;
-              font-size: 12px;
-              color: #777;
+            100% {
+                width: 100%;
             }
-            .button {
-              display: inline-block;
-              padding: 10px 20px;
-              margin: 20px 0;
-              font-size: 16px;
-              color: white;
-              background-color: #ffffff;
-              text-decoration: none;
-              border-radius: 5px;
+        }
+        .header {
+            text-align: center;
+            padding: 30px;
+            background-color: hsl(144, 96%, 9%); /* Vibrant orange for energy */
+        }
+        .header h1 {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: bold;
+            margin: 0;
+        }
+        .content {
+            text-align: center;
+            padding: 40px;
+        }
+        .content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            color: hsl(144, 96%, 9%);
+            margin-bottom: 20px;
+        }
+        .content p {
+            font-size: 18px;
+            color: hsl(144, 96%, 9%);
+            margin-bottom: 25px;
+        }
+        .content strong {
+            color: hsl(145, 96%, 21%);
+        }
+        .quote {
+            font-style: italic;
+            color: hsl(144, 96%, 9%);
+            text-align: center;
+            border-left: 4px solid hsl(145, 96%, 21%);
+            padding-left: 15px;
+            margin: 30px 0;
+            font-family: 'Playfair Display', serif;
+        }
+        /* .content .code {
+            font-size: 28px;
+            font-weight: bold;
+            color: hsl(144, 96%, 9%); 
+            margin: 20px 0;
+            padding: 15px;
+            border: 2px dashed hsl(145, 96%, 21%); 
+            border-radius: 10px;
+            background-color: #fff5f0;
+            opacity: 0;
+            animation: codeReveal 5s ease-out forwards;
+        }
+        @keyframes codeReveal {
+            0% {
+                opacity: 0;
+                transform: scale(0.95);
             }
-          </style>
-        </head>
-        <body>
-          <div class="email-container">
-            <div class="email-header">
-              <h1>Reset Your Password</h1>
-            </div>
-            <div class="email-body">
-              <p>Hi,</p>
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        } */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f1f1f1;
+            color: #888888;
+        }
+        .footer p {
+            margin: 0;
+        }
+
+        /* Delivery Bike Animation */
+        .delivery-animation {
+            position: relative;
+            overflow: hidden;
+            height: 50px;
+            margin: 40px 0 0 0;
+        }
+        .delivery-bike {
+            position: absolute;
+            bottom: 0;
+            left: -60px; /* Starts off-screen */
+            width: 60px;
+            height: 40px;
+            animation: bikeMove 7s linear infinite; /* Continuous movement */
+        }
+        @keyframes bikeMove {
+            0% {
+                left: 100%;
+            }
+            100% {
+                right: 100%;
+            }
+        }
+       .reset-password-button{
+        padding: 16px 24px;
+        background-color: hsl(144, 96%, 9%);
+       border-radius: 20px;
+       
+       }
+       .reset-password-button:hover{
+        background-color: hsl(145, 96%, 21%);
+        cursor: pointer;
+        animation-delay: 2ms;
+        transition:1s;
+       }
+       a{
+        color: white;
+        text-decoration: none;
+       }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Banner Section -->
+        
+
+        <!-- Header Section -->
+        <div class="header">
+            <h1>Email Verification</h1>
+        </div>
+        <div class="banner"></div>
+        <!-- Main Content Section -->
+        <div class="content">
+            <p>Hi,</p>
               <p>We received a request to reset your password. Click the button below to reset it.</p>
-              <a href="${resetURL}" class="button">Reset Password</a>
+              <button class="reset-password-button"><a href="${resetURL}">Reset Password</a></button>
               <p>If you didn't request a password reset, please ignore this email.</p>
               <p>Thank you,<br/>The Fast-Bites Team</p>
+
+            <div class="quote">
+                “Good food is all the sweeter when shared with good friends.”<br><strong>– Fast-Bites Team</strong>
             </div>
-            <div class="email-footer">
-              <p>&copy; 2024 Fast-Bites. All rights reserved.</p>
-            </div>
-          </div>
-        </body>
-      </html>
+
+            <p>
+                If you have any questions or need assistance, our customer support team is always here for you. 
+                Feel free to <a href="mailto:support@fast-bites.com" style="color: hsl(145, 96%, 21%); text-decoration: none;">reach out</a> at any time.
+            </p>
+       
+
+        </div>
+
+        <!-- Delivery Bike Animation Section -->
+        <div class="delivery-animation">
+            <img class="delivery-bike" src="Gemini_Generated_Image_8wkyr98wkyr98wky.png" alt="Delivery Bike"> <!-- Replace with an appropriate image URL -->
+        </div>
+
+        <!-- Footer Section -->
+        <div class="footer">
+            <p>&copy; 2024 Fast-Bites. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
     `;
   };
 
   export const generateResetSuccessEmailHtml = () => {
     return `
-      <html>
-        <head>
-          <style>
-            .email-container {
-              font-family: Arial, sans-serif;
-              line-height: 1.6;
-              color: #333;
-              padding: 20px;
-              background-color: #f4f4f4;
-              border-radius: 10px;
-              max-width: 600px;
-              margin: auto;
+     <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9fafc;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            animation: slideIn 1s ease-out forwards;
+        }
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
             }
-            .email-header {
-              background-color: #4CAF50;
-              color: white;
-              padding: 10px;
-              text-align: center;
-              border-radius: 10px 10px 0 0;
+            100% {
+                opacity: 1;
+                transform: translateY(0);
             }
-            .email-body {
-              padding: 20px;
-              background-color: white;
-              border-radius: 0 0 10px 10px;
+        }
+        .banner {
+            width: 100%;
+            height: 200px;
+            background-image: url('fast-bites-logo.png'); /* Replace with a food-related banner */
+           background-size: contain;
+            background-position: center;
+            position: relative;
+            animation: bannerMove 7s linear infinite; /* Continuous movement */
+        }
+        @keyframes bannerMove {
+            0% {
+                width: 300%;
+                
             }
-            .email-footer {
-              text-align: center;
-              padding: 10px;
-              font-size: 12px;
-              color: #777;
+            100% {
+                width: 100%;
             }
-          </style>
-        </head>
-        <body>
-          <div class="email-container">
-            <div class="email-header">
-              <h1>Password Reset Successful</h1>
+        }
+        .header {
+            text-align: center;
+            padding: 30px;
+            background-color: hsl(144, 96%, 9%); /* Vibrant orange for energy */
+        }
+        .header h1 {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: bold;
+            margin: 0;
+        }
+        .content {
+            text-align: center;
+            padding: 40px;
+        }
+        .content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            color: hsl(144, 96%, 9%);
+            margin-bottom: 20px;
+        }
+        .content p {
+            font-size: 18px;
+            color: hsl(144, 96%, 9%);
+            margin-bottom: 25px;
+        }
+        .content strong {
+            color: hsl(145, 96%, 21%);
+        }
+        .quote {
+            font-style: italic;
+            color: hsl(144, 96%, 9%);
+            text-align: center;
+            border-left: 4px solid hsl(145, 96%, 21%);
+            padding-left: 15px;
+            margin: 30px 0;
+            font-family: 'Playfair Display', serif;
+        }
+        /* .content .code {
+            font-size: 28px;
+            font-weight: bold;
+            color: hsl(144, 96%, 9%); 
+            margin: 20px 0;
+            padding: 15px;
+            border: 2px dashed hsl(145, 96%, 21%); 
+            border-radius: 10px;
+            background-color: #fff5f0;
+            opacity: 0;
+            animation: codeReveal 5s ease-out forwards;
+        }
+        @keyframes codeReveal {
+            0% {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        } */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f1f1f1;
+            color: #888888;
+        }
+        .footer p {
+            margin: 0;
+        }
+
+        /* Delivery Bike Animation */
+        .delivery-animation {
+            position: relative;
+            overflow: hidden;
+            height: 50px;
+            margin: 40px 0 0 0;
+        }
+        .delivery-bike {
+            position: absolute;
+            bottom: 0;
+            left: -60px; /* Starts off-screen */
+            width: 60px;
+            height: 40px;
+            animation: bikeMove 7s linear infinite; /* Continuous movement */
+        }
+        @keyframes bikeMove {
+            0% {
+                left: 100%;
+            }
+            100% {
+                right: 100%;
+            }
+        }
+       .reset-password-button{
+        padding: 16px 24px;
+        background-color: hsl(144, 96%, 9%);
+       border-radius: 20px;
+       
+       }
+       .reset-password-button:hover{
+        background-color: hsl(145, 96%, 21%);
+        cursor: pointer;
+        animation-delay: 2ms;
+        transition:1s;
+       }
+       a{
+        color: white;
+        text-decoration: none;
+       }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Banner Section -->
+        
+
+        <!-- Header Section -->
+        <div class="header">
+            <h1>Email Verification</h1>
+        </div>
+        <div class="banner"></div>
+        <!-- Main Content Section -->
+        <div class="content">
+            <p>Hi,</p>
+            <p>Your password has been successfully reset. You can now log in with your new password.</p>
+            <p>If you did not request this change, please contact our support team immediately.</p>
+            <p>Thank you,<br/>The Fast-Bites Team</p>
+
+            <div class="quote">
+                “Good food is all the sweeter when shared with good friends.”<br><strong>– Fast-Bites Team</strong>
             </div>
-            <div class="email-body">
-              <p>Hi,</p>
-              <p>Your password has been successfully reset. You can now log in with your new password.</p>
-              <p>If you did not request this change, please contact our support team immediately.</p>
-              <p>Thank you,<br/>The Fast-Bites Team</p>
-            </div>
-            <div class="email-footer">
-              <p>&copy; 2024 Fast-Bites. All rights reserved.</p>
-            </div>
-          </div>
-        </body>
-      </html>
+
+            <p>
+                If you have any questions or need assistance, our customer support team is always here for you. 
+                Feel free to <a href="mailto:support@fast-bites.com" style="color: hsl(145, 96%, 21%); text-decoration: none;">reach out</a> at any time.
+            </p>
+       
+
+        </div>
+
+        <!-- Delivery Bike Animation Section -->
+        <div class="delivery-animation">
+            <img class="delivery-bike" src="Gemini_Generated_Image_8wkyr98wkyr98wky.png" alt="Delivery Bike"> <!-- Replace with an appropriate image URL -->
+        </div>
+
+        <!-- Footer Section -->
+        <div class="footer">
+            <p>&copy; 2024 Fast-Bites. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
     `;
   };
