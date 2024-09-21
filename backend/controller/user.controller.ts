@@ -26,12 +26,13 @@ export const signup = async (req: Request, res: Response) => {
             email,
             password: hashedPassword,
             contact: Number(contact),
-            verificationToken,
-            verificationTokenExpiresAt: Date.now() + 24 * 60 * 60 * 1000,
+            verificationtoken: verificationToken,
+            verificationtokenexpireat: Date.now() + 24 * 60 * 60 * 1000,
         })
         generateToken(res,user);
+        console.log(user);
 
-        await sendVerificationEmail(email, verificationToken);
+        // await sendVerificationEmail(email, verificationToken);
 
         const userWithoutPassword = await User.findOne({ email }).select("-password");
         return res.status(201).json({
@@ -81,7 +82,7 @@ export const verifyEmail = async (req: Request, res: Response) => {
     try {
         const { verificationCode } = req.body;
        
-        const user = await User.findOne({ verificationToken: verificationCode, verificationTokenExpiresAt: { $gt: Date.now() } }).select("-password");
+        const user = await User.findOne({ verificationtoken: verificationCode, verificationtokenexpireat: { $gt: Date.now() } }).select("-password");
 
         if (!user) {
             return res.status(400).json({
@@ -95,7 +96,7 @@ export const verifyEmail = async (req: Request, res: Response) => {
         await user.save();
 
         // send welcome email
-        await sendWelcomeEmail(user.email, user.fullname);
+        // await sendWelcomeEmail(user.email, user.fullname);
 
         return res.status(200).json({
             success: true,
@@ -153,7 +154,7 @@ export const resetPassword = async (req: Request, res: Response) => {
     try {
         const { token } = req.params;
         const { newPassword } = req.body;
-        const user = await User.findOne({ resetPasswordToken: token, resetPasswordTokenExpiresAt: { $gt: Date.now() } });
+        const user = await User.findOne({ resetpasswordtoken: token, resetpasswordtokenexpire: { $gt: Date.now() } });
         if (!user) {
             return res.status(400).json({
                 success: false,
