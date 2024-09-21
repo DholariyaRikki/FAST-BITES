@@ -29,7 +29,7 @@ const ForgotPassword = () => {
             loading ? (
                 <Button disabled className="bg-orange hover:bg-hoverOrange"><Loader2 className="mr-2 h-4 w-4 animate-spin"/> Please wait</Button>
             ) : (
-                <Button className="bg-orange-500 hover:bg-hoverOrange">Send Reset Link</Button>
+                <Button className="bg-orange hover:bg-hoverOrange">Send Reset Link</Button>
             )
         }
         <span className="text-center">

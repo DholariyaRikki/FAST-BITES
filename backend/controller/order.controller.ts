@@ -1,10 +1,7 @@
 import { Request, Response } from "express";
-import { Restaurant } from "../models/restaurant.models";
-import { Order } from "../models/order.models";
+import { Restaurant } from "../models/restaurant.model";
+import { Order } from "../models/order.model";
 import Stripe from "stripe";
-import dotenv from "dotenv"
-dotenv.config()
-
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
@@ -55,6 +52,8 @@ export const createCheckoutSession = async (req: Request, res: Response) => {
             cartItems: checkoutSessionRequest.cartItems,
             status: "pending"
         });
+
+        // line items
         const menuItems = restaurant.menus;
         const lineItems = createLineItems(checkoutSessionRequest, menuItems);
 
@@ -91,17 +90,25 @@ export const stripeWebhook = async (req: Request, res: Response) => {
 
     try {
         const signature = req.headers["stripe-signature"];
+
+        // Construct the payload string for verification
         const payloadString = JSON.stringify(req.body, null, 2);
         const secret = process.env.WEBHOOK_ENDPOINT_SECRET!;
+
+        // Generate test header string for event construction
         const header = stripe.webhooks.generateTestHeaderString({
             payload: payloadString,
             secret,
         });
+
+        // Construct the event using the payload string and header
         event = stripe.webhooks.constructEvent(payloadString, header, secret);
     } catch (error: any) {
         console.error('Webhook error:', error.message);
         return res.status(400).send(`Webhook error: ${error.message}`);
     }
+
+    // Handle the checkout session completed event
     if (event.type === "checkout.session.completed") {
         try {
             const session = event.data.object as Stripe.Checkout.Session;
@@ -110,6 +117,8 @@ export const stripeWebhook = async (req: Request, res: Response) => {
             if (!order) {
                 return res.status(404).json({ message: "Order not found" });
             }
+
+            // Update the order with the amount and status
             if (session.amount_total) {
                 order.totalAmount = session.amount_total;
             }
@@ -121,10 +130,12 @@ export const stripeWebhook = async (req: Request, res: Response) => {
             return res.status(500).json({ message: "Internal Server Error" });
         }
     }
+    // Send a 200 response to acknowledge receipt of the event
     res.status(200).send();
 };
 
 export const createLineItems = (checkoutSessionRequest: CheckoutSessionRequest, menuItems: any) => {
+    // 1. create line items
     const lineItems = checkoutSessionRequest.cartItems.map((cartItem) => {
         const menuItem = menuItems.find((item: any) => item._id.toString() === cartItem.menuId);
         if (!menuItem) throw new Error(`Menu item id not found`);
@@ -141,5 +152,6 @@ export const createLineItems = (checkoutSessionRequest: CheckoutSessionRequest, 
             quantity: cartItem.quantity,
         }
     })
+    // 2. return lineItems
     return lineItems;
 }

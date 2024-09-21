@@ -6,12 +6,10 @@ import { FormEvent, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const VerifyEmail = () => {
-  
   const [otp, setOtp] = useState<string[]>(["", "", "", "", "", ""]);
   const inputRef = useRef<any>([]);
-  const { verifyEmail } = useUserStore();
+  const { loading, verifyEmail } = useUserStore();
   const navigate = useNavigate();
-  const loading = false;
   const handleChange = (index: number, value: string) => {
     if (/^[a-zA-Z0-9]$/.test(value) || value === "") {
       const newOtp = [...otp];
@@ -70,16 +68,16 @@ const VerifyEmail = () => {
               />
             ))}
           </div>
-          {loading ? 
+          {loading ? (
             <Button
               disabled
-              className="bg-orange-500 hover:bg-hoverOrange mt-6 w-full"
+              className="bg-orange hover:bg-hoverOrange mt-6 w-full"
             >
               <Loader2 className="mr-2 w-4 h-4 animate-spin" />
               Please wait
             </Button>
-           : (
-            <Button className="bg-orange-500 hover:bg-hoverOrange mt-6 w-full">
+          ) : (
+            <Button className="bg-orange hover:bg-hoverOrange mt-6 w-full">
               Verify
             </Button>
           )}
