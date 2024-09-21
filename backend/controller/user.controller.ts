@@ -30,7 +30,6 @@ export const signup = async (req: Request, res: Response) => {
             verificationtokenexpireat: Date.now() + 24 * 60 * 60 * 1000,
         })
         generateToken(res,user);
-        console.log(user);
 
         // await sendVerificationEmail(email, verificationToken);
 
