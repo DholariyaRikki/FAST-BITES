@@ -19,36 +19,9 @@ export const htmlContent: string = `
             border-radius: 20px;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            animation: slideIn 1s ease-out forwards;
+            
         }
-        @keyframes slideIn {
-            0% {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .banner {
-            width: 100%;
-            height: 200px;
-            background-image: url('fast-bites-logo.png'); /* Replace with a food-related banner */
-           background-size: contain;
-            background-position: center;
-            position: relative;
-            animation: bannerMove 7s linear infinite; /* Continuous movement */
-        }
-        @keyframes bannerMove {
-            0% {
-                width: 300%;
-                
-            }
-            100% {
-                width: 100%;
-            }
-        }
+        
         .header {
             text-align: center;
             padding: 30px;
@@ -87,18 +60,6 @@ export const htmlContent: string = `
             border: 2px dashed hsl(145, 96%, 21%); 
             border-radius: 10px;
             background-color: #fff5f0;
-            opacity: 0;
-            animation: codeReveal 1.5s ease-out forwards;
-        }
-        @keyframes codeReveal {
-            0% {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
         }
         .quote {
             font-style: italic;
@@ -109,28 +70,6 @@ export const htmlContent: string = `
             margin: 30px 0;
             font-family: 'Playfair Display', serif;
         }
-        /* .content .code {
-            font-size: 28px;
-            font-weight: bold;
-            color: hsl(144, 96%, 9%); 
-            margin: 20px 0;
-            padding: 15px;
-            border: 2px dashed hsl(145, 96%, 21%); 
-            border-radius: 10px;
-            background-color: #fff5f0;
-            opacity: 0;
-            animation: codeReveal 5s ease-out forwards;
-        }
-        @keyframes codeReveal {
-            0% {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        } */
         .footer {
             text-align: center;
             padding: 20px;
@@ -141,29 +80,8 @@ export const htmlContent: string = `
             margin: 0;
         }
 
-        /* Delivery Bike Animation */
-        .delivery-animation {
-            position: relative;
-            overflow: hidden;
-            height: 50px;
-            margin: 40px 0 0 0;
-        }
-        .delivery-bike {
-            position: absolute;
-            bottom: 0;
-            left: -60px; /* Starts off-screen */
-            width: 60px;
-            height: 40px;
-            animation: bikeMove 7s linear infinite; /* Continuous movement */
-        }
-        @keyframes bikeMove {
-            0% {
-                left: 100%;
-            }
-            100% {
-                right: 100%;
-            }
-        }
+        
+        
        .reset-password-button{
         padding: 16px 24px;
         background-color: hsl(144, 96%, 9%);
@@ -191,7 +109,6 @@ export const htmlContent: string = `
         <div class="header">
             <h1>Email Verification</h1>
         </div>
-        <div class="banner"></div>
         <!-- Main Content Section -->
         <div class="content">
             <h2>Verify Your Email!</h2>
@@ -212,9 +129,6 @@ export const htmlContent: string = `
         </div>
 
         <!-- Delivery Bike Animation Section -->
-        <div class="delivery-animation">
-            <img class="delivery-bike" src="Gemini_Generated_Image_8wkyr98wkyr98wky.png" alt="Delivery Bike"> <!-- Replace with an appropriate image URL -->
-        </div>
 
         <!-- Footer Section -->
         <div class="footer">
@@ -248,36 +162,9 @@ export const generateWelcomeEmailHtml = (name: string) => {
             border-radius: 20px;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            animation: slideIn 1s ease-out forwards;
+            
         }
-        @keyframes slideIn {
-            0% {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .banner {
-            width: 100%;
-            height: 200px;
-            background-image: url('fast-bites-logo.png'); /* Replace with a food-related banner */
-           background-size: contain;
-            background-position: center;
-            position: relative;
-            animation: bannerMove 7s linear infinite; /* Continuous movement */
-        }
-        @keyframes bannerMove {
-            0% {
-                width: 300%;
-                
-            }
-            100% {
-                width: 100%;
-            }
-        }
+        
         .header {
             text-align: center;
             padding: 30px;
@@ -316,28 +203,7 @@ export const generateWelcomeEmailHtml = (name: string) => {
             margin: 30px 0;
             font-family: 'Playfair Display', serif;
         }
-        /* .content .code {
-            font-size: 28px;
-            font-weight: bold;
-            color: hsl(144, 96%, 9%); 
-            margin: 20px 0;
-            padding: 15px;
-            border: 2px dashed hsl(145, 96%, 21%); 
-            border-radius: 10px;
-            background-color: #fff5f0;
-            opacity: 0;
-            animation: codeReveal 5s ease-out forwards;
-        }
-        @keyframes codeReveal {
-            0% {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        } */
+        
         .footer {
             text-align: center;
             padding: 20px;
@@ -348,29 +214,8 @@ export const generateWelcomeEmailHtml = (name: string) => {
             margin: 0;
         }
 
-        /* Delivery Bike Animation */
-        .delivery-animation {
-            position: relative;
-            overflow: hidden;
-            height: 50px;
-            margin: 40px 0 0 0;
-        }
-        .delivery-bike {
-            position: absolute;
-            bottom: 0;
-            left: -60px; /* Starts off-screen */
-            width: 60px;
-            height: 40px;
-            animation: bikeMove 7s linear infinite; /* Continuous movement */
-        }
-        @keyframes bikeMove {
-            0% {
-                left: 100%;
-            }
-            100% {
-                right: 100%;
-            }
-        }
+        
+        
        .reset-password-button{
         padding: 16px 24px;
         background-color: hsl(144, 96%, 9%);
@@ -398,7 +243,6 @@ export const generateWelcomeEmailHtml = (name: string) => {
         <div class="header">
             <h1>Email Verification</h1>
         </div>
-        <div class="banner"></div>
         <!-- Main Content Section -->
         <div class="content">
             <h2>Welcome to Fast-Bites, <strong>${name}</strong></h2>
@@ -428,9 +272,6 @@ export const generateWelcomeEmailHtml = (name: string) => {
         </div>
 
         <!-- Delivery Bike Animation Section -->
-        <div class="delivery-animation">
-            <img class="delivery-bike" src="Gemini_Generated_Image_8wkyr98wkyr98wky.png" alt="Delivery Bike"> <!-- Replace with an appropriate image URL -->
-        </div>
 
         <!-- Footer Section -->
         <div class="footer">
@@ -464,36 +305,9 @@ export const generatePasswordResetEmailHtml = (resetURL: string) => {
             border-radius: 20px;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            animation: slideIn 1s ease-out forwards;
+            
         }
-        @keyframes slideIn {
-            0% {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .banner {
-            width: 100%;
-            height: 200px;
-            background-image: url('fast-bites-logo.png'); /* Replace with a food-related banner */
-           background-size: contain;
-            background-position: center;
-            position: relative;
-            animation: bannerMove 7s linear infinite; /* Continuous movement */
-        }
-        @keyframes bannerMove {
-            0% {
-                width: 300%;
-                
-            }
-            100% {
-                width: 100%;
-            }
-        }
+        
         .header {
             text-align: center;
             padding: 30px;
@@ -532,28 +346,7 @@ export const generatePasswordResetEmailHtml = (resetURL: string) => {
             margin: 30px 0;
             font-family: 'Playfair Display', serif;
         }
-        /* .content .code {
-            font-size: 28px;
-            font-weight: bold;
-            color: hsl(144, 96%, 9%); 
-            margin: 20px 0;
-            padding: 15px;
-            border: 2px dashed hsl(145, 96%, 21%); 
-            border-radius: 10px;
-            background-color: #fff5f0;
-            opacity: 0;
-            animation: codeReveal 5s ease-out forwards;
-        }
-        @keyframes codeReveal {
-            0% {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        } */
+        
         .footer {
             text-align: center;
             padding: 20px;
@@ -564,29 +357,8 @@ export const generatePasswordResetEmailHtml = (resetURL: string) => {
             margin: 0;
         }
 
-        /* Delivery Bike Animation */
-        .delivery-animation {
-            position: relative;
-            overflow: hidden;
-            height: 50px;
-            margin: 40px 0 0 0;
-        }
-        .delivery-bike {
-            position: absolute;
-            bottom: 0;
-            left: -60px; /* Starts off-screen */
-            width: 60px;
-            height: 40px;
-            animation: bikeMove 7s linear infinite; /* Continuous movement */
-        }
-        @keyframes bikeMove {
-            0% {
-                left: 100%;
-            }
-            100% {
-                right: 100%;
-            }
-        }
+        
+        
        .reset-password-button{
         padding: 16px 24px;
         background-color: hsl(144, 96%, 9%);
@@ -614,7 +386,6 @@ export const generatePasswordResetEmailHtml = (resetURL: string) => {
         <div class="header">
             <h1>Email Verification</h1>
         </div>
-        <div class="banner"></div>
         <!-- Main Content Section -->
         <div class="content">
             <p>Hi,</p>
@@ -636,9 +407,6 @@ export const generatePasswordResetEmailHtml = (resetURL: string) => {
         </div>
 
         <!-- Delivery Bike Animation Section -->
-        <div class="delivery-animation">
-            <img class="delivery-bike" src="Gemini_Generated_Image_8wkyr98wkyr98wky.png" alt="Delivery Bike"> <!-- Replace with an appropriate image URL -->
-        </div>
 
         <!-- Footer Section -->
         <div class="footer">
@@ -672,36 +440,9 @@ export const generatePasswordResetEmailHtml = (resetURL: string) => {
             border-radius: 20px;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            animation: slideIn 1s ease-out forwards;
+            
         }
-        @keyframes slideIn {
-            0% {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .banner {
-            width: 100%;
-            height: 200px;
-            background-image: url('fast-bites-logo.png'); /* Replace with a food-related banner */
-           background-size: contain;
-            background-position: center;
-            position: relative;
-            animation: bannerMove 7s linear infinite; /* Continuous movement */
-        }
-        @keyframes bannerMove {
-            0% {
-                width: 300%;
-                
-            }
-            100% {
-                width: 100%;
-            }
-        }
+        
         .header {
             text-align: center;
             padding: 30px;
@@ -740,28 +481,7 @@ export const generatePasswordResetEmailHtml = (resetURL: string) => {
             margin: 30px 0;
             font-family: 'Playfair Display', serif;
         }
-        /* .content .code {
-            font-size: 28px;
-            font-weight: bold;
-            color: hsl(144, 96%, 9%); 
-            margin: 20px 0;
-            padding: 15px;
-            border: 2px dashed hsl(145, 96%, 21%); 
-            border-radius: 10px;
-            background-color: #fff5f0;
-            opacity: 0;
-            animation: codeReveal 5s ease-out forwards;
-        }
-        @keyframes codeReveal {
-            0% {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        } */
+        
         .footer {
             text-align: center;
             padding: 20px;
@@ -772,29 +492,8 @@ export const generatePasswordResetEmailHtml = (resetURL: string) => {
             margin: 0;
         }
 
-        /* Delivery Bike Animation */
-        .delivery-animation {
-            position: relative;
-            overflow: hidden;
-            height: 50px;
-            margin: 40px 0 0 0;
-        }
-        .delivery-bike {
-            position: absolute;
-            bottom: 0;
-            left: -60px; /* Starts off-screen */
-            width: 60px;
-            height: 40px;
-            animation: bikeMove 7s linear infinite; /* Continuous movement */
-        }
-        @keyframes bikeMove {
-            0% {
-                left: 100%;
-            }
-            100% {
-                right: 100%;
-            }
-        }
+        
+        
        .reset-password-button{
         padding: 16px 24px;
         background-color: hsl(144, 96%, 9%);
@@ -822,7 +521,6 @@ export const generatePasswordResetEmailHtml = (resetURL: string) => {
         <div class="header">
             <h1>Email Verification</h1>
         </div>
-        <div class="banner"></div>
         <!-- Main Content Section -->
         <div class="content">
             <p>Hi,</p>
@@ -843,10 +541,6 @@ export const generatePasswordResetEmailHtml = (resetURL: string) => {
         </div>
 
         <!-- Delivery Bike Animation Section -->
-        <div class="delivery-animation">
-            <img class="delivery-bike" src="Gemini_Generated_Image_8wkyr98wkyr98wky.png" alt="Delivery Bike"> <!-- Replace with an appropriate image URL -->
-        </div>
-
         <!-- Footer Section -->
         <div class="footer">
             <p>&copy; 2024 Fast-Bites. All rights reserved.</p>
