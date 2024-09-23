@@ -84,7 +84,7 @@ export const updateRestaurant = async (req: Request, res: Response) => {
         restaurant.cuisines = JSON.parse(cuisines);
 
         if (file) {
-            const imageUrl = await uploadImageOnCloudinary(file as Express.Multer.File);
+            const imageUrl = await uploadImageOnCloudinary(file as Express.Multer.File, "restaurants");
             restaurant.imageUrl = imageUrl;
         }
         await restaurant.save();
