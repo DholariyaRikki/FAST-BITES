@@ -32,10 +32,10 @@ export const createRestaurant = async (req: Request, res: Response) => {
         // Create the restaurant in the database
         await Restaurant.create({
             user: req.id,
-            restaurantName,
+            restaurantname: restaurantName,
             city,
             country,
-            deliveryTime,
+            deliverytime: deliveryTime,
             cuisines: JSON.parse(cuisines),
             imageUrl
         });
