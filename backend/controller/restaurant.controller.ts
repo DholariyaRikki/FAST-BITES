@@ -3,26 +3,33 @@ import { Restaurant } from "../models/restaurant.models";
 import uploadImageOnCloudinary from "../utils/imageupload";
 import { Order } from "../models/order.models";
 
+
 export const createRestaurant = async (req: Request, res: Response) => {
     try {
         const { restaurantName, city, country, deliveryTime, cuisines } = req.body;
-        const file = req.file;
- 
+        const file = req.file; // The uploaded file from the request
 
-        const restaurant = await Restaurant.findOne({ user: req.id });
-        if (restaurant) {
+        // Check if the user already has a restaurant
+        const existingRestaurant = await Restaurant.findOne({ user: req.id });
+        if (existingRestaurant) {
             return res.status(400).json({
                 success: false,
-                message: "Restaurant already exist for this user"
-            })
+                message: "Restaurant already exists for this user"
+            });
         }
+
+        // Ensure an image file is provided
         if (!file) {
             return res.status(400).json({
                 success: false,
                 message: "Image is required"
-            })
+            });
         }
-        const imageUrl = await uploadImageOnCloudinary(file as Express.Multer.File);
+
+        // Upload the image to Cloudinary
+        const imageUrl = await uploadImageOnCloudinary(file as Express.Multer.File, "restaurants"); // Specify folder name
+
+        // Create the restaurant in the database
         await Restaurant.create({
             user: req.id,
             restaurantName,
@@ -32,15 +39,17 @@ export const createRestaurant = async (req: Request, res: Response) => {
             cuisines: JSON.parse(cuisines),
             imageUrl
         });
+
         return res.status(201).json({
             success: true,
-            message: "Restaurant Added"
+            message: "Restaurant added successfully"
         });
     } catch (error) {
-        console.log(error);
-        return res.status(500).json({ message: "Internal server error" })
+        console.error("Error creating restaurant:", error); // Improved logging for debugging
+        return res.status(500).json({ message: "Internal server error" });
     }
-}
+};
+
 export const getRestaurant = async (req: Request, res: Response) => {
     try {
         const restaurant = await Restaurant.findOne({ user: req.id }).populate('menus');
@@ -76,7 +85,7 @@ export const updateRestaurant = async (req: Request, res: Response) => {
 
         if (file) {
             const imageUrl = await uploadImageOnCloudinary(file as Express.Multer.File);
-            restaurant.imageurl = imageUrl;
+            restaurant.imageUrl = imageUrl;
         }
         await restaurant.save();
         return res.status(200).json({

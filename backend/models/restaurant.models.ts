@@ -7,7 +7,7 @@ export interface Irestaurant{
     country:string
     deliverytime:number
     cuisines:string[]
-    imageurl:string
+    imageUrl:string
     menus:mongoose.Schema.Types.ObjectId[]
 }
 
@@ -46,7 +46,7 @@ const restaurantSchema = new mongoose.Schema<Irestaurant>({
         type:mongoose.Schema.Types.ObjectId,
         ref:"Menu"
     }],
-    imageurl:{
+    imageUrl:{
         type:String,
         required:true
     }

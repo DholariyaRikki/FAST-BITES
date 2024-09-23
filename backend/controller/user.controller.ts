@@ -202,20 +202,46 @@ export const updateProfile = async (req: Request, res: Response) => {
     try {
         const userId = req.id;
         const { fullname, email, address, city, country, profilePicture } = req.body;
-        // upload image on cloudinary
-        let cloudResponse: any;
-        cloudResponse = await cloudinary.uploader.upload(profilePicture);
-        const updatedData = {fullname, email, address, city, country, profilePicture};
 
-        const user = await User.findByIdAndUpdate(userId, updatedData,{new:true}).select("-password");
+        // Check if profilePicture exists and upload it to Cloudinary
+        let cloudResponse;
+        if (profilePicture) {
+            try {
+                cloudResponse = await cloudinary.uploader.upload(profilePicture, {
+                    folder: "user_profiles",
+                    resource_type: "image"
+                });
+            } catch (err) {
+                console.error("Cloudinary upload error:", err);
+                return res.status(500).json({ message: "Error uploading image" });
+            }
+        }
+
+        // Prepare updated data, conditionally adding profilePicture if upload succeeded
+        const updatedData: any = {
+            fullname,
+            email,
+            address,
+            city,
+            country,
+        };
+
+        if (cloudResponse?.secure_url) {
+            updatedData.profilePicture = cloudResponse.secure_url; // Store the Cloudinary URL
+        }
+
+        // Update user in the database
+        const user = await User.findByIdAndUpdate(userId, updatedData, { new: true }).select("-password");
 
         return res.status(200).json({
-            success:true,
+            success: true,
             user,
-            message:"Profile updated successfully"
+            message: "Profile updated successfully"
         });
     } catch (error) {
-        console.error(error);
+        console.error("Error updating profile:", error);
         return res.status(500).json({ message: "Internal server error" });
     }
-}
+};
+
+
