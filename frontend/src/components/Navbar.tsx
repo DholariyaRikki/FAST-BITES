@@ -78,7 +78,7 @@ const Navbar = () => {
             )}
           </div>
           <div className="flex items-center gap-4">
-            <div>
+            {/* <div>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="outline" size="icon">
@@ -92,7 +92,7 @@ const Navbar = () => {
                   <DropdownMenuItem onClick={()=> setTheme('dark')}>Dark</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-            </div>
+            </div> */}
             <Link to="/cart" className="relative cursor-pointer">
               <ShoppingCart />
               {cart.length > 0 && (
@@ -155,7 +155,7 @@ const MobileNavbar = () => {
       <SheetContent className="flex flex-col">
         <SheetHeader className="flex flex-row items-center justify-between mt-2">
           <SheetTitle>Fast-Bites</SheetTitle>
-          <DropdownMenu>
+          {/* <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="icon">
                 <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
@@ -167,7 +167,7 @@ const MobileNavbar = () => {
               <DropdownMenuItem onClick={() => setTheme('light')}>Light</DropdownMenuItem>
               <DropdownMenuItem onClick={() => setTheme('dark')}>Dark</DropdownMenuItem>
             </DropdownMenuContent>
-          </DropdownMenu>
+          </DropdownMenu> */}
         </SheetHeader>
         <Separator className="my-2" />
         <SheetDescription className="flex-1">

@@ -6,22 +6,22 @@ import {
   MenubarMenu,
   MenubarTrigger,
 } from "./menubar";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "./dropdown-menu";
+// import {
+//   DropdownMenu,
+//   DropdownMenuContent,
+//   DropdownMenuItem,
+//   DropdownMenuTrigger,
+// } from "./dropdown-menu";
 import { Button } from "./button";
 import {
   HandPlatter,
   Loader2,
   Menu,
-  Moon,
+  // Moon,
   PackageCheck,
   ShoppingCart,
   SquareMenu,
-  Sun,
+  // Sun,
   User,
   UtensilsCrossed,
 } from "lucide-react";
@@ -39,13 +39,13 @@ import {
 import { Separator } from "./separator";
 import { useUserStore } from "@/store/useUserStore";
 import { useCartStore } from "@/store/useCartStore";
-import { useThemeStore } from "@/store/useThemeStore";
+// import { useThemeStore } from "@/store/useThemeStore";
 
 const Navbar = () => {
   const {  loading, logout } = useUserStore();
   const { cart } = useCartStore();
-  const {setTheme} = useThemeStore();
-  const user = false;
+  // const {setTheme} = useThemeStore();
+  // const user = false;
 
   return (
     <div className="max-w-7xl mx-auto">
@@ -87,7 +87,7 @@ const Navbar = () => {
           </div>
           <div className="flex items-center gap-4">
             <div>
-              <DropdownMenu>
+              {/* <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="outline" size="icon">
                     <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
@@ -99,7 +99,7 @@ const Navbar = () => {
                   <DropdownMenuItem onClick={()=> setTheme('light')}>Light</DropdownMenuItem>
                   <DropdownMenuItem onClick={()=> setTheme('dark')}>Dark</DropdownMenuItem>
                 </DropdownMenuContent>
-              </DropdownMenu>
+              </DropdownMenu> */}
             </div>
             <Link to="/cart" className="relative cursor-pointer">
               <ShoppingCart />
@@ -148,7 +148,7 @@ export default Navbar;
 
 const MobileNavbar = () => {
   const { user, logout, loading } = useUserStore();
-  const {setTheme} = useThemeStore();
+  // const {setTheme} = useThemeStore();
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -163,7 +163,7 @@ const MobileNavbar = () => {
       <SheetContent className="flex flex-col">
         <SheetHeader className="flex flex-row items-center justify-between mt-2">
           <SheetTitle>Fast-Bites</SheetTitle>
-          <DropdownMenu>
+          {/* <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="icon">
                 <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
@@ -175,7 +175,7 @@ const MobileNavbar = () => {
               <DropdownMenuItem onClick={() => setTheme('light')}>Light</DropdownMenuItem>
               <DropdownMenuItem onClick={() => setTheme('dark')}>Dark</DropdownMenuItem>
             </DropdownMenuContent>
-          </DropdownMenu>
+          </DropdownMenu> */}
         </SheetHeader>
         <Separator className="my-2" />
         <SheetDescription className="flex-1">
