@@ -27,7 +27,7 @@ export const createRestaurant = async (req: Request, res: Response) => {
         }
 
         // Upload the image to Cloudinary
-        const imageUrl = await uploadImageOnCloudinary(file as Express.Multer.File, "restaurants"); // Specify folder name
+        const imageUrl = await uploadImageOnCloudinary(file as Express.Multer.File); // Specify folder name
 
         // Create the restaurant in the database
         await Restaurant.create({
@@ -84,7 +84,7 @@ export const updateRestaurant = async (req: Request, res: Response) => {
         restaurant.cuisines = JSON.parse(cuisines);
 
         if (file) {
-            const imageUrl = await uploadImageOnCloudinary(file as Express.Multer.File, "restaurants");
+            const imageUrl = await uploadImageOnCloudinary(file as Express.Multer.File);
             restaurant.imageUrl = imageUrl;
         }
         await restaurant.save();
