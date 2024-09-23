@@ -35,10 +35,10 @@ app.use("/api/v1/restaurant", restaurantRoute);
 app.use("/api/v1/menu", menuRoute);
 app.use("/api/v1/order", orderRoute);
 
-app.use(express.static(path.join(__dirname, '../frontend')));
-app.use("*",(_,res) => {
-    res.sendFile(path.join(__dirname, '../frontend/index.html'));
-});
+app.use(express.static(path.join(DIRNAME, '../frontend')));
+// app.use("*",(_,res) => {
+//     res.sendFile(path.join(DIRNAME, "../frontend","index.html"));
+// });
 
 app.listen(PORT, () => {
     connectDB();

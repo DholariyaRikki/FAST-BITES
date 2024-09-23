@@ -19,7 +19,7 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
             });
         }
         // verify the toekn
-        const decode = jwt.verify(token, process.env.SECRET_KEY!) as jwt.JwtPayload;
+        const decode = jwt.verify(token, process.env.JWT_SECRET!) as jwt.JwtPayload;
         // check is decoding was successfull
         if (!decode) {
             return res.status(401).json({
