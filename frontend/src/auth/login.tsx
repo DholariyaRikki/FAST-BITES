@@ -4,7 +4,7 @@ import { Separator } from "@/components/ui/separator";
 import { LoginInputState, userLoginSchema } from "@/schema/userSchema";
 import { useUserStore } from "@/store/useUserStore";
 
-import { Loader2, LockKeyhole, Mail } from "lucide-react";
+import { Loader2, LockKeyhole, Mail, Eye, EyeOff } from "lucide-react";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -14,13 +14,15 @@ const Login = () => {
     password: "",
   });
   const [errors, setErrors] = useState<Partial<LoginInputState>>({});
-   const { loading, login } = useUserStore();
+  const [showPassword, setShowPassword] = useState(false);
+  const { loading, login } = useUserStore();
   const navigate = useNavigate();
 
   const changeEventHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
   };
+
   const loginSubmitHandler = async (e: FormEvent) => {
     e.preventDefault();
     const result = userLoginSchema.safeParse(input);
@@ -32,8 +34,13 @@ const Login = () => {
     try {
       await login(input);
       navigate("/");
-    } catch (error) {console.log(error);
+    } catch (error) {
+      console.log(error);
     }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
   };
 
   return (
@@ -64,7 +71,7 @@ const Login = () => {
         <div className="mb-4">
           <div className="relative">
             <Input
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Password"
               name="password"
               value={input.password}
@@ -72,6 +79,13 @@ const Login = () => {
               className="pl-10 focus-visible:ring-1"
             />
             <LockKeyhole className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              className="absolute inset-y-2 right-2 text-gray-500"
+            >
+              {showPassword ? <EyeOff /> : <Eye />}
+            </button>
             {errors && (
               <span className="text-xs text-red-500">{errors.password}</span>
             )}
