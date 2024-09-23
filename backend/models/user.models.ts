@@ -8,7 +8,7 @@ export interface IUser{
     address:string
     city:string
     country:string
-    profilepicture:string
+    profilePicture:string
     admin:boolean
     lastlogin?:Date
     isverified?:boolean
@@ -54,7 +54,7 @@ const userSchema = new mongoose.Schema<IUserDocument>({
         type:String,
         default:"update your country"
     },
-    profilepicture:{
+    profilePicture:{
         type:String,
         default:""
     },
