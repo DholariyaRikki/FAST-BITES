@@ -39,13 +39,10 @@ import {
 import { Separator } from "./separator";
 import { useUserStore } from "@/store/useUserStore";
 import { useCartStore } from "@/store/useCartStore";
-// import { useThemeStore } from "@/store/useThemeStore";
 
 const Navbar = () => {
   const {  loading, logout } = useUserStore();
   const { cart } = useCartStore();
-  // const {setTheme} = useThemeStore();
-  // const user = false;
 
   return (
     <div className="max-w-7xl mx-auto">
@@ -86,21 +83,6 @@ const Navbar = () => {
             )
           </div>
           <div className="flex items-center gap-4">
-            <div>
-              {/* <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline" size="icon">
-                    <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                    <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-                    <span className="sr-only">Toggle theme</span>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem onClick={()=> setTheme('light')}>Light</DropdownMenuItem>
-                  <DropdownMenuItem onClick={()=> setTheme('dark')}>Dark</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu> */}
-            </div>
             <Link to="/cart" className="relative cursor-pointer">
               <ShoppingCart />
               {cart.length > 0 && (
@@ -148,7 +130,6 @@ export default Navbar;
 
 const MobileNavbar = () => {
   const { user, logout, loading } = useUserStore();
-  // const {setTheme} = useThemeStore();
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -163,19 +144,6 @@ const MobileNavbar = () => {
       <SheetContent className="flex flex-col">
         <SheetHeader className="flex flex-row items-center justify-between mt-2">
           <SheetTitle>Fast-Bites</SheetTitle>
-          {/* <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="icon">
-                <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-                <span className="sr-only">Toggle theme</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => setTheme('light')}>Light</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setTheme('dark')}>Dark</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu> */}
         </SheetHeader>
         <Separator className="my-2" />
         <SheetDescription className="flex-1">
