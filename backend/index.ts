@@ -16,7 +16,6 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-const DIRNAME = path.resolve();
 
 // default middleware for any mern project
 app.use(bodyParser.json({ limit: '10mb' }));
@@ -35,9 +34,12 @@ app.use("/api/v1/restaurant", restaurantRoute);
 app.use("/api/v1/menu", menuRoute);
 app.use("/api/v1/order", orderRoute);
 
+const DIRNAME = __dirname;  // Ensure this is set correctly
 app.use(express.static(path.join(DIRNAME, '../frontend')));
-app.use("*",(_,res) => {
-    res.sendFile(path.join(DIRNAME, "../frontend","dist","index.html"));
+
+// Catch-all route to serve index.html (for client-side routing in SPAs)
+app.use("*", (_, res) => {
+    res.sendFile(path.join(DIRNAME, "../frontend", "index.html"));
 });
 
 app.listen(PORT, () => {
