@@ -35,11 +35,11 @@ app.use("/api/v1/menu", menuRoute);
 app.use("/api/v1/order", orderRoute);
 
 const DIRNAME = __dirname;  // Ensure this is set correctly
-app.use(express.static(path.join(DIRNAME, '../frontend')));
+app.use(express.static(path.join(DIRNAME, '../frontend/dist')));
 
 // Catch-all route to serve index.html (for client-side routing in SPAs)
 app.use("*", (_, res) => {
-    res.sendFile(path.join(DIRNAME, "../frontend", "index.html"));
+    res.sendFile(path.join(DIRNAME, "../frontend/dist", "index.html"));
 });
 
 app.listen(PORT, () => {
