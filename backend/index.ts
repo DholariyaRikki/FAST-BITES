@@ -36,9 +36,9 @@ app.use("/api/v1/menu", menuRoute);
 app.use("/api/v1/order", orderRoute);
 
 app.use(express.static(path.join(DIRNAME, '../frontend')));
-// app.use("*",(_,res) => {
-//     res.sendFile(path.join(DIRNAME, "../frontend","index.html"));
-// });
+app.use("*",(_,res) => {
+    res.sendFile(path.join(DIRNAME, "../frontend","index.html"));
+});
 
 app.listen(PORT, () => {
     connectDB();
