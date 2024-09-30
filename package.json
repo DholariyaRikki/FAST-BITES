@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nodemon backend/index.ts",
     "build":"npm install && npm install --prefix frontend && npm run build --prefix frontend",
-    "start":"nodemon --exec 'node --max-old-space-size=4096' backend/index.ts"
+    "start":"NODE_OPTIONS='--max-old-space-size=4096' nodemon backend/index.ts"
   },
   "keywords": [],
   "author": "",
