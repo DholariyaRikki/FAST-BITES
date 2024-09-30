@@ -6,7 +6,8 @@ import cloudinary from "../utils/cloudinary";
 import { generateVerificationCode } from "../utils/generateVerificationCode";
 import { generateToken } from "../utils/generatetoken";
 import { sendPasswordResetEmail, sendResetSuccessEmail, sendVerificationEmail, sendWelcomeEmail } from "../mailtrap/email";
-
+import dotenv from "dotenv";
+dotenv.config();
 export const signup = async (req: Request, res: Response) => {
     try {
         const { fullname, email, password, contact } = req.body;
@@ -122,6 +123,7 @@ export const forgotPassword = async (req: Request, res: Response) => {
     try {
         const { email } = req.body;
         const user = await User.findOne({ email });
+        console.log(req.body);
 
         if (!user) {
             return res.status(400).json({

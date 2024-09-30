@@ -95,14 +95,31 @@ export const useUserStore = create<UserState>()(persist((set) => ({
     checkAuthentication: async () => {
         try {
             set({ isCheckingAuth: true });
+    
             const response = await axios.get(`${API_END_POINT}/check-auth`);
+            
             if (response.data.success) {
-                set({user: response.data.user, isAuthenticated: true, isCheckingAuth: false });
+                console.log(response.data.user);
+                set({
+                    user: response.data.user,
+                    isAuthenticated: true,
+                    isCheckingAuth: false
+                });
+            } else {
+                // Handle unexpected "success" responses (edge case)
+                set({
+                    isAuthenticated: false,
+                    isCheckingAuth: false,
+                });
             }
         } catch (error) {
-            set({isAuthenticated: false, isCheckingAuth: false });
+            set({
+                isAuthenticated: false,
+                isCheckingAuth: false
+            });
         }
     },
+    
     logout: async () => {
         try {
             set({ loading: true });
