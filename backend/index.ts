@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(express.json());
 app.use(cookieParser());
 const corsOptions = {
-    origin: "https://fast-bites.onrender.com",
+    origin: "https://localhost:5173",
     credentials: true
 }
 app.use(cors(corsOptions));
@@ -34,12 +34,9 @@ app.use("/api/v1/restaurant", restaurantRoute);
 app.use("/api/v1/menu", menuRoute);
 app.use("/api/v1/order", orderRoute);
 
-const DIRNAME = __dirname;  // Ensure this is set correctly
-app.use(express.static(path.join(DIRNAME, '../frontend/dist')));
-
-// Catch-all route to serve index.html (for client-side routing in SPAs)
-app.use("*", (_, res) => {
-    res.sendFile(path.join(DIRNAME, "../frontend/dist", "index.html"));
+app.use(express.static(path.join(__dirname, '../frontend')));
+app.use("*",(_,res) => {
+    res.sendFile(path.join(__dirname, "../frontend","index.html"));
 });
 
 app.listen(PORT, () => {

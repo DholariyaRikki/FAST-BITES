@@ -4,7 +4,7 @@ import axios from "axios";
 import { LoginInputState, SignupInputState } from "@/schema/userSchema";
 import { toast } from "sonner";
 
-const API_END_POINT = "https://fast-bites.onrender.com/api/v1/user"
+const API_END_POINT = "https://localhost:3350/api/v1/user"
 axios.defaults.withCredentials = true;
 
 type User = {

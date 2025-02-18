@@ -4,8 +4,8 @@
   "main": "index.ts",
   "scripts": {
     "dev": "nodemon backend/index.ts",
-    "build":"npm install && npm install --prefix frontend && npm run build --prefix frontend",
-    "start":"NODE_OPTIONS='--max-old-space-size=4096' nodemon backend/index.ts"
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "nodemon backend/index.ts"
   },
   "keywords": [],
   "author": "",
@@ -17,7 +17,7 @@
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "crypto-js": "^4.2.0",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.4.7",
     "express": "^4.21.0",
     "jsonwebtoken": "^9.0.2",
     "mailtrap": "^3.4.0",
