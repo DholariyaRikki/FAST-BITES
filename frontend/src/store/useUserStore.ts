@@ -4,11 +4,10 @@ import axios from "axios";
 import { LoginInputState, SignupInputState } from "@/schema/userSchema";
 import { toast } from "sonner";
 
-const API_END_POINT = "https://localhost:3350/api/v1/user"
+const API_END_POINT = "http://localhost:3350/api/v1/user"
 axios.defaults.withCredentials = true;
 
 type User = {
-    isverified: any;
     fullname:string;
     email:string;
     contact:number;
@@ -95,31 +94,16 @@ export const useUserStore = create<UserState>()(persist((set) => ({
     checkAuthentication: async () => {
         try {
             set({ isCheckingAuth: true });
-    
+            console.log("Frontend Cookies:", document.cookie);
             const response = await axios.get(`${API_END_POINT}/check-auth`);
-            
+            console.log("Auth Response:", response.data);
             if (response.data.success) {
-                console.log(response.data.user);
-                set({
-                    user: response.data.user,
-                    isAuthenticated: true,
-                    isCheckingAuth: false
-                });
-            } else {
-                // Handle unexpected "success" responses (edge case)
-                set({
-                    isAuthenticated: false,
-                    isCheckingAuth: false,
-                });
+                set({user: response.data.user, isAuthenticated: true, isCheckingAuth: false });
             }
         } catch (error) {
-            set({
-                isAuthenticated: false,
-                isCheckingAuth: false
-            });
+            set({isAuthenticated: false, isCheckingAuth: false });
         }
     },
-    
     logout: async () => {
         try {
             set({ loading: true });
